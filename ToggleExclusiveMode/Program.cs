@@ -14,7 +14,8 @@ namespace ToggleExclusiveMode
             {
                 Console.WriteLine(@"Attempting to read 'Rocksmith.ini'...");
                 Console.WriteLine("\n");
-                string text = File.ReadAllText(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini");
+				string text = File.ReadAllText(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini");
+
                 if (text.Contains("ExclusiveMode=1"))
                 {
                     // Console.WriteLine("Exclusive Mode was enabled. Disabling it... \n"); Commenting out as might be confusing for the UX
