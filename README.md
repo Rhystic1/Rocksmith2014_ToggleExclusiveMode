@@ -3,9 +3,8 @@ A very simple tool that allows you to switch Exclusive Mode on or off in Rocksmi
 
 HOW TO USE:
 
-1) Extract ExclusiveMode.7z anywhere you like.
+1) Extract Release.7z anywhere you like.
 2) Run the .exe file.
+3) Press the START button.
 
-If you realised you made a mistake, you can revert the changes by just pressing R. Then, press any key to close the program.
-
-NOTE: For now, the program will only work if you have installed Rocksmith in the default folder.
+The program supports custom folders: if it can't find the game in the default directory, it will prompt you to select the Rocksmith.ini file manually.
