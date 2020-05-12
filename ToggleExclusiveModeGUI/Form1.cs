@@ -12,6 +12,8 @@ namespace ToggleExclusiveModeGUI
 {
     public partial class Form1 : Form
     {
+        internal static bool buttonWasPressed;
+
         public Form1()
         {
             InitializeComponent();
@@ -30,5 +32,17 @@ namespace ToggleExclusiveModeGUI
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            buttonWasPressed = true;
+            Close();
+        }
+
+        private void Form1_Closing(object sender, CancelEventArgs e)
+        {
+            Close();
+        }
+
     }
 }
