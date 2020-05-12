@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ToggleExclusiveModeGUI
 {
-    public class Status
+    public class Toggle
     {
-        public static void RetrieveStatus()
+        public static void Start()
         {
             Console.WriteLine(@"Attempting to read 'Rocksmith.ini'...");
             Console.WriteLine("\n");
@@ -20,8 +18,10 @@ namespace ToggleExclusiveModeGUI
             string text = File.ReadAllText(GameCheck.defaultpath);
             if (text.Contains("ExclusiveMode=1"))
             {
-                MessageBox.Show("Exclusive Mode is currently enabled.",
-                    "Exclusive Mode Status",
+                text = text.Replace("ExclusiveMode=1", "ExclusiveMode=0");
+                File.WriteAllText(GameCheck.defaultpath, text);
+                MessageBox.Show("Exclusive Mode has been disabled. You should now be able to stream properly!",
+                    "Success!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
                     MessageBoxDefaultButton.Button1,
@@ -29,8 +29,10 @@ namespace ToggleExclusiveModeGUI
             }
             else
             {
-                MessageBox.Show("Exclusive Mode is currently disabled.",
-                    "Exclusive Mode Status",
+                text = text.Replace("ExclusiveMode=0", "ExclusiveMode=1");
+                File.WriteAllText(GameCheck.defaultpath, text);
+                MessageBox.Show("Exclusive Mode has been enabled. Enjoy minimal latency!",
+                    "Success!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
                     MessageBoxDefaultButton.Button1,
