@@ -17,21 +17,17 @@ namespace ToggleExclusiveModeGUI
         public Form1()
         {
             InitializeComponent();
+            TopMost = true;
         }
 
         public void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-
         }
 
         public void Form1_Load(object sender, EventArgs e)
         {
         }
 
-        public void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -42,6 +38,7 @@ namespace ToggleExclusiveModeGUI
         private void Form1_Closing(object sender, CancelEventArgs e)
         {
             Close();
+            Application.Exit();
         }
 
     }

@@ -3,74 +3,94 @@ using System.Collections.Generic;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ToggleExclusiveModeGUI
+{
+    public static class Program
     {
-       public static class Program
+        [STAThread]
+        static void Main(string[] args)
         {
-            [STAThread]
-            static void Main(string[] args)
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+            string defaultpath = @"C:\Programm Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
+            if (Form1.buttonWasPressed == true)
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1());
-                string defaultpath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
-                if (Form1.buttonWasPressed == true)
-                {
                 Start();
-                }
-                void Start()
+            }
+            void Start()
+            {
+                Console.WriteLine(@"Attempting to read 'Rocksmith.ini'...");
+                Console.WriteLine("\n");
+                if (!defaultpath.Contains("Rocksmith.ini"))
                 {
-                    Console.WriteLine(@"Attempting to read 'Rocksmith.ini'...");
-                    Console.WriteLine("\n");
+                    MessageBox.Show("Invalid file selected. Please select your Rocksmith.ini file contained inside your Rocksmith 2014 installation folder.", 
+                        "Invalid selection!", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Warning, 
+                        MessageBoxDefaultButton.Button1, 
+                        MessageBoxOptions.ServiceNotification);
+                    OpenFileDialog b = new OpenFileDialog();
+                    if (b.ShowDialog() == DialogResult.OK)
+                    {
+                        defaultpath = b.FileName;
+                        Start();
+                        return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
+                    }
+                }
                 try
                 {
                     string text = File.ReadAllText(defaultpath);
                     if (text.Contains("ExclusiveMode=1"))
                     {
-                        // Console.WriteLine("Exclusive Mode was enabled. Disabling it... \n"); Commenting out as might be confusing for the UX
                         text = text.Replace("ExclusiveMode=1", "ExclusiveMode=0");
                         File.WriteAllText(defaultpath, text);
-                        Console.WriteLine("Exclusive Mode has been disabled. You should now be able to stream properly! \n");
+                        MessageBox.Show("Exclusive Mode has been disabled. You should now be able to stream properly!", 
+                            "Success!", 
+                            MessageBoxButtons.OK, 
+                            MessageBoxIcon.Information, 
+                            MessageBoxDefaultButton.Button1, 
+                            MessageBoxOptions.ServiceNotification); // Gives focus to the message.
                     }
                     else
                     {
-                        // Console.WriteLine("Exclusive Mode was disabled. Enabling it... \n"); Commenting out as might be confusing for the UX
                         text = text.Replace("ExclusiveMode=0", "ExclusiveMode=1");
                         File.WriteAllText(defaultpath, text);
-                        Console.WriteLine("Exclusive Mode has been enabled. Enjoy minimal latency! \n");
+                        MessageBox.Show("Exclusive Mode has been enabled. Enjoy minimal latency!", 
+                            "Success!", 
+                            MessageBoxButtons.OK, 
+                            MessageBoxIcon.Information, 
+                            MessageBoxDefaultButton.Button1, 
+                            MessageBoxOptions.ServiceNotification); // Gives focus to the message.
                     }
                 }
 
                 catch (DirectoryNotFoundException) // If the file is not detected at its default location, the program will prompt the user and restart.
                 {
-                    // Form1.textBox1 += "Directory not found. Please navigate to the game folder and select the Rocksmith.ini file." + " \r\n";
+                    MessageBox.Show("Directory not found. Please navigate to the game folder and select the Rocksmith.ini file.", 
+                        "Folder not found", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Warning, 
+                        MessageBoxDefaultButton.Button1, 
+                        MessageBoxOptions.ServiceNotification); // Gives focus to the message.
                     OpenFileDialog b = new OpenFileDialog();
 
                     if (b.ShowDialog() == DialogResult.OK)
                     {
                         defaultpath = b.FileName;
                         Start();
+                        return;
                     }
                 }
-
-                Console.WriteLine("Made a mistake? Press R to restart and invert the selection.");
-                Console.WriteLine("Press any other key to exit.");
-                // ConsoleKeyInfo selection = Console.ReadKey(); Not supported in WPF
-                //if (selection.Key == ConsoleKey.R)
-                  //  {
-                    //    Console.Clear();
-                      //  Start();
-                    //}
-                    //else
-                    //{
-                    //}
-                }
-
+                Application.Exit();
             }
 
         }
+
     }
+}
