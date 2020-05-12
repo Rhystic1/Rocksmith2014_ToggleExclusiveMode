@@ -18,7 +18,7 @@ namespace ToggleExclusiveModeGUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            string defaultpath = @"C:\Programm Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
+            string defaultpath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
             if (Form1.buttonWasPressed == true)
             {
                 Start();
