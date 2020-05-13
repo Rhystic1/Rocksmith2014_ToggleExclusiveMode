@@ -16,25 +16,27 @@ namespace ToggleExclusiveModeGUI
         {
             Console.WriteLine(@"Attempting to read 'Rocksmith.ini'...");
             Console.WriteLine("\n");
-            GameCheck.CheckFile();
-            string text = File.ReadAllText(GameCheck.defaultpath);
-            if (text.Contains("ExclusiveMode=1"))
-            {
-                MessageBox.Show("Exclusive Mode is currently enabled.",
-                    "Exclusive Mode Status",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.ServiceNotification); // Gives focus to the message.
-            }
-            else
-            {
-                MessageBox.Show("Exclusive Mode is currently disabled.",
-                    "Exclusive Mode Status",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+            GameCheck.LoadPreviousSaveDirectory();
+            if (File.Exists(GameCheck.inipath)) {
+                string text = File.ReadAllText(GameCheck.inipath);
+                if (text.Contains("ExclusiveMode=1"))
+                {
+                    MessageBox.Show("Exclusive Mode is currently enabled.",
+                        "Exclusive Mode Status",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+                }
+                else
+                {
+                    MessageBox.Show("Exclusive Mode is currently disabled.",
+                        "Exclusive Mode Status",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+                }
             }
         }
     }

@@ -7,48 +7,75 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToggleExclusiveModeGUI.Properties;
 
 namespace ToggleExclusiveModeGUI
 {
+
     public class GameCheck
     {
-        public static string defaultpath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
+        public static string defaultinipath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
         public static string defaultgamepath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith2014.exe";
+        public static string inipath;
+        public static string gamepath;
+
+        public static void LoadPreviousSaveDirectory()
+        {
+            SaveDirectory.IsValidSaveDirectory(SaveDirectory.settingsFile);
+            if (!SaveDirectory.IsValidSaveDirectory(SaveDirectory.settingsFile))
+            {
+                CheckFile();
+                CheckGame();
+                SaveDirectory.CreateSaveDirectory(inipath, gamepath);
+            }
+        }
+
+        public static void CheckDefaultLocations()
+        {
+            if (File.Exists(defaultinipath) & File.Exists(defaultgamepath))
+            {
+                inipath = defaultinipath;
+                gamepath = defaultgamepath;
+            }
+        }
         public static void CheckFile()
         {
-            if (!defaultpath.Contains("Rocksmith.ini"))
+            if (!File.Exists(inipath) & !File.Exists(inipath + "\\Rocksmith.ini"))
             {
-                MessageBox.Show("Invalid file selected. Please select your Rocksmith.ini file contained inside your Rocksmith 2014 installation folder.",
-                    "Invalid selection!",
+                MessageBox.Show("This folder doesn't have a Rocksmith settings file in it!",
+                    "Invalid Settings",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.ServiceNotification);
-                OpenFileDialog b = new OpenFileDialog();
+                FolderBrowserDialog b = new FolderBrowserDialog();
                 if (b.ShowDialog() == DialogResult.OK)
                 {
-                    defaultpath = b.FileName;
+                    inipath = b.SelectedPath + "\\Rocksmith.ini";
                     CheckFile();
                     return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
                 }
             }
             try
             {
-                string text = File.ReadAllText(defaultpath);
+                if (File.Exists("Rocksmith.ini"))
+                {
+                    string text = File.ReadAllText(inipath);
+                }
             }
             catch (DirectoryNotFoundException) // If the file is not detected at its default location, the program will prompt the user and restart.
             {
-                MessageBox.Show("Directory not found. Please navigate to the game folder and select the Rocksmith.ini file.",
-                    "Folder not found",
+                MessageBox.Show("Please select your Rocksmith 2014 installation folder.",
+                    "Install folder not found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.ServiceNotification); // Gives focus to the message.
-                OpenFileDialog b = new OpenFileDialog();
+                FolderBrowserDialog b = new FolderBrowserDialog();
 
                 if (b.ShowDialog() == DialogResult.OK)
                 {
-                    defaultpath = b.FileName;
+                    inipath = b.SelectedPath + "\\Rocksmith.ini";
                     CheckFile();
                     return;
                 }
@@ -56,39 +83,45 @@ namespace ToggleExclusiveModeGUI
         }
         public static void CheckGame()
         {
-            if (!defaultgamepath.Contains("Rocksmith2014.exe"))
+            if (!File.Exists(gamepath) & !File.Exists(inipath.Substring(0, inipath.Length - 14) + "\\Rocksmith2014.exe"))
             {
-                MessageBox.Show("Invalid file selected. Please select your Rocksmith2014.exe file contained inside your Rocksmith 2014 installation folder.",
-                    "Invalid selection!",
+                MessageBox.Show("Please select your Rocksmith 2014 installation folder.",
+                    "Invalid Executable",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.ServiceNotification);
-                OpenFileDialog b = new OpenFileDialog();
+                FolderBrowserDialog b = new FolderBrowserDialog();
                 if (b.ShowDialog() == DialogResult.OK)
                 {
-                    defaultgamepath = b.FileName;
+                    gamepath = b.SelectedPath + "\\Rocksmith2014.exe";
                     CheckGame();
                     return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
+                }
+            } else
+            {
+                if (File.Exists(inipath.Substring(0, inipath.Length - 14) + "\\Rocksmith2014.exe"))
+                {
+                    gamepath = inipath.Substring(0, inipath.Length - 14) + "\\Rocksmith2014.exe";
                 }
             }
             try
             {
-                File.Exists(defaultgamepath);
+                File.Exists(gamepath);
             }
             catch (DirectoryNotFoundException) // If the file is not detected at its default location, the program will prompt the user and restart.
             {
-                MessageBox.Show("Directory not found. Please navigate to the game folder and select the Rocksmith2014.exe file.",
-                    "Folder not found",
+                MessageBox.Show("Your Rocksmith 2014 launcher can't be found",
+                    "Install folder not found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.ServiceNotification); // Gives focus to the message.
-                OpenFileDialog b = new OpenFileDialog();
+                FolderBrowserDialog b = new FolderBrowserDialog();
 
                 if (b.ShowDialog() == DialogResult.OK)
                 {
-                    defaultgamepath = b.FileName;
+                    gamepath = b.SelectedPath + "\\Rocksmith2014.exe";
                     CheckGame();
                     return;
                 }
