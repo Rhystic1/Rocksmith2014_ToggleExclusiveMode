@@ -12,7 +12,7 @@ namespace ToggleExclusiveModeGUI
         public static void launchGame()
         {
             GameCheck.CheckGame();
-            System.Diagnostics.Process.Start(GameCheck.defaultgamepath);
+            System.Diagnostics.Process.Start("steam://run/221680");
         }
     }
 }
