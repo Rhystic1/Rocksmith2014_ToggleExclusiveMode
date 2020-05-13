@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace ToggleExclusiveModeGUI
 {
@@ -45,9 +47,25 @@ namespace ToggleExclusiveModeGUI
             this.button1.Size = new System.Drawing.Size(160, 136);
             this.button1.TabIndex = 1;
             this.button1.TabStop = false;
-            this.button1.Text = "START";
+            GameCheck.LoadPreviousSaveDirectory();
+            if (File.Exists(GameCheck.inipath))
+            {
+                if (File.ReadAllText(GameCheck.inipath).Contains("ExclusiveMode=1"))
+                {
+                    this.button1.Text = "TURN OFF EXCLUSIVE MODE";
+                }
+                else if (File.ReadAllText(GameCheck.inipath).Contains("ExclusiveMode=0"))
+                {
+                    this.button1.Text = "TURN ON EXCLUSIVE MODE";
+                }
+            }
+            else
+            {
+                GameCheck.CheckFile();
+                GameCheck.CheckGame();
+            }
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // button2
             // 
@@ -59,7 +77,7 @@ namespace ToggleExclusiveModeGUI
             this.button2.TabIndex = 2;
             this.button2.Text = "STATUS";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
@@ -71,7 +89,7 @@ namespace ToggleExclusiveModeGUI
             this.button3.TabIndex = 3;
             this.button3.Text = "LAUNCH THE GAME";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // Form1
             // 

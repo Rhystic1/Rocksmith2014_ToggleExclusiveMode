@@ -9,10 +9,10 @@ namespace ToggleExclusiveModeGUI
 {
     public class LaunchGame
     {
-        public static void launchGame()
+        public static void LaunchRocksmith2014()
         {
-            GameCheck.CheckGame();
-            System.Diagnostics.Process.Start(GameCheck.defaultgamepath);
+            GameCheck.LoadPreviousSaveDirectory();
+            System.Diagnostics.Process.Start("steam://run/221680");
         }
     }
 }

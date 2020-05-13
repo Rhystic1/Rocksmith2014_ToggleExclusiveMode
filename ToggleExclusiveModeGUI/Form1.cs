@@ -18,7 +18,7 @@ namespace ToggleExclusiveModeGUI
             TopMost = true;
         }
 
-        public void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        public void OpenFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
         }
 
@@ -27,7 +27,7 @@ namespace ToggleExclusiveModeGUI
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             Toggle.Start();
         }
@@ -38,14 +38,14 @@ namespace ToggleExclusiveModeGUI
             Application.Exit();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             Status.RetrieveStatus();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
-            LaunchGame.launchGame();
+            LaunchGame.LaunchRocksmith2014();
             Application.Exit();
         }
     }

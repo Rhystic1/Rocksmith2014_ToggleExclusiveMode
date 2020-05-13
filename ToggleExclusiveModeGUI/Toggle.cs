@@ -14,29 +14,39 @@ namespace ToggleExclusiveModeGUI
         {
             Console.WriteLine(@"Attempting to read 'Rocksmith.ini'...");
             Console.WriteLine("\n");
-            GameCheck.CheckFile();
-            string text = File.ReadAllText(GameCheck.defaultpath);
-            if (text.Contains("ExclusiveMode=1"))
-            {
-                text = text.Replace("ExclusiveMode=1", "ExclusiveMode=0");
-                File.WriteAllText(GameCheck.defaultpath, text);
-                MessageBox.Show("Exclusive Mode has been disabled. You should now be able to stream properly!",
-                    "Success!",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+            GameCheck.LoadPreviousSaveDirectory();
+            if (File.Exists(GameCheck.inipath)) {
+                string text = File.ReadAllText(GameCheck.inipath);
+
+                if (text.Contains("ExclusiveMode=1"))
+                {
+                    text = text.Replace("ExclusiveMode=1", "ExclusiveMode=0");
+                    File.WriteAllText(GameCheck.inipath, text);
+                    MessageBox.Show("Exclusive Mode has been disabled. You should now be able to stream properly!",
+                        "Success!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+                    RefreshForm.RefreshExclusivityMode();
+                }
+                else
+                {
+                    text = text.Replace("ExclusiveMode=0", "ExclusiveMode=1");
+                    File.WriteAllText(GameCheck.inipath, text);
+                    MessageBox.Show("Exclusive Mode has been enabled. Enjoy minimal latency!",
+                        "Success!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1,
+                        MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+                    RefreshForm.RefreshExclusivityMode();
+                }
             }
             else
             {
-                text = text.Replace("ExclusiveMode=0", "ExclusiveMode=1");
-                File.WriteAllText(GameCheck.defaultpath, text);
-                MessageBox.Show("Exclusive Mode has been enabled. Enjoy minimal latency!",
-                    "Success!",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+                GameCheck.CheckFile();
+                GameCheck.CheckGame();
             }
         }
     }
