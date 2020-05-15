@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace ToggleExclusiveModeGUI
 {
-    public class GameCheck
+    public class GameCheck // Logic that allows the program to search for and confirm the game path
     {
         public static string defaultpath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
         public static string defaultgamepath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith2014.exe";
         public static void CheckFile()
         {
-            if (!defaultpath.Contains("Rocksmith.ini"))
+            if (!defaultpath.Contains("Rocksmith.ini")) // If we don't find the Rocksmith.ini file, then we're in the wrong folder
             {
                 MessageBox.Show("Invalid file selected. Please select your Rocksmith.ini file contained inside your Rocksmith 2014 installation folder.",
                     "Invalid selection!",
@@ -24,10 +24,10 @@ namespace ToggleExclusiveModeGUI
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.ServiceNotification);
-                OpenFileDialog b = new OpenFileDialog();
+                OpenFileDialog b = new OpenFileDialog(); // We prompt the user for the correct folder and rerun the logic
                 if (b.ShowDialog() == DialogResult.OK)
                 {
-                    defaultpath = b.FileName;
+                    defaultpath = b.FileName; // Changing the path from default to the new one that the user selected.
                     CheckFile();
                     return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
                 }
@@ -54,7 +54,7 @@ namespace ToggleExclusiveModeGUI
                 }
             }
         }
-        public static void CheckGame()
+        public static void CheckGame() // Mostly the same as before, except we are looking for the executable. Legacy code before the changes to the run game logic.
         {
             if (!defaultgamepath.Contains("Rocksmith2014.exe"))
             {

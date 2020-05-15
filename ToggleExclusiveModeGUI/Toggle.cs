@@ -14,9 +14,9 @@ namespace ToggleExclusiveModeGUI
         {
             Console.WriteLine(@"Attempting to read 'Rocksmith.ini'...");
             Console.WriteLine("\n");
-            GameCheck.CheckFile();
+            GameCheck.CheckFile(); // We make sure that the path exists and is the correct one.
             string text = File.ReadAllText(GameCheck.defaultpath);
-            if (text.Contains("ExclusiveMode=1"))
+            if (text.Contains("ExclusiveMode=1")) // We want to look for the "ExclusiveMode" line in particular.
             {
                 text = text.Replace("ExclusiveMode=1", "ExclusiveMode=0");
                 File.WriteAllText(GameCheck.defaultpath, text);

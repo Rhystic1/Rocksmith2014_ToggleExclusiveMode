@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace ToggleExclusiveModeGUI
 {
-    public class Status
+    public class Status // Logic to check the status of Exclusive Mode without actually changing it.
     {
         public static void RetrieveStatus()
         {
             Console.WriteLine(@"Attempting to read 'Rocksmith.ini'...");
             Console.WriteLine("\n");
-            GameCheck.CheckFile();
+            GameCheck.CheckFile(); // We make sure that the file exists
             string text = File.ReadAllText(GameCheck.defaultpath);
             if (text.Contains("ExclusiveMode=1"))
             {
