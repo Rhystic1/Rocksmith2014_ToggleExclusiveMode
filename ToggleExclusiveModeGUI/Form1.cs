@@ -25,6 +25,7 @@ namespace ToggleExclusiveModeGUI
 
         public void Form1_Load(object sender, EventArgs e)
         {
+            GameCheck.CheckFile();
         }
 
         private void button1_Click(object sender, EventArgs e)

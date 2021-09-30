@@ -7,13 +7,16 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToggleExclusiveModeGUI.Properties;
 
 namespace ToggleExclusiveModeGUI
 {
     public class GameCheck // Logic that allows the program to search for and confirm the game path
     {
-        public static string defaultpath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
-        public static string defaultgamepath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith2014.exe";
+        //public static string defaultpath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
+        //public static string defaultgamepath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith2014.exe";
+        public static string defaultpath = Settings.Default.defaultpath;
+        public static string defaultgamepath = Settings.Default.defaultgamepath;
         public static void CheckFile()
         {
             if (!defaultpath.Contains("Rocksmith.ini")) // If we don't find the Rocksmith.ini file, then we're in the wrong folder
@@ -28,6 +31,8 @@ namespace ToggleExclusiveModeGUI
                 if (b.ShowDialog() == DialogResult.OK)
                 {
                     defaultpath = b.FileName; // Changing the path from default to the new one that the user selected.
+                    Settings.Default.defaultpath.Replace(defaultpath, b.FileName);
+                    Settings.Default.Save();
                     CheckFile();
                     return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
                 }
@@ -49,50 +54,53 @@ namespace ToggleExclusiveModeGUI
                 if (b.ShowDialog() == DialogResult.OK)
                 {
                     defaultpath = b.FileName;
+                    Settings.Default.defaultpath.Replace(defaultpath, b.FileName);
+                    Settings.Default.Save();
                     CheckFile();
                     return;
                 }
             }
         }
-        public static void CheckGame() // Mostly the same as before, except we are looking for the executable. Legacy code before the changes to the run game logic.
-        {
-            if (!defaultgamepath.Contains("Rocksmith2014.exe"))
-            {
-                MessageBox.Show("Invalid file selected. Please select your Rocksmith2014.exe file contained inside your Rocksmith 2014 installation folder.",
-                    "Invalid selection!",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.ServiceNotification);
-                OpenFileDialog b = new OpenFileDialog();
-                if (b.ShowDialog() == DialogResult.OK)
-                {
-                    defaultgamepath = b.FileName;
-                    CheckGame();
-                    return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
-                }
-            }
-            try
-            {
-                File.Exists(defaultgamepath);
-            }
-            catch (DirectoryNotFoundException) // If the file is not detected at its default location, the program will prompt the user and restart.
-            {
-                MessageBox.Show("Directory not found. Please navigate to the game folder and select the Rocksmith2014.exe file.",
-                    "Folder not found",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.ServiceNotification); // Gives focus to the message.
-                OpenFileDialog b = new OpenFileDialog();
+        //public static void CheckGame() // Mostly the same as before, except we are looking for the executable. Legacy code before the changes to the run game logic.
+        //{
+        //    if (!defaultgamepath.Contains("Rocksmith2014.exe"))
+        //    {
+        //        MessageBox.Show("Invalid file selected. Please select your Rocksmith2014.exe file contained inside your Rocksmith 2014 installation folder.",
+        //            "Invalid selection!",
+        //            MessageBoxButtons.OK,
+        //            MessageBoxIcon.Warning,
+        //            MessageBoxDefaultButton.Button1,
+        //            MessageBoxOptions.ServiceNotification);
+        //        OpenFileDialog b = new OpenFileDialog();
+        //        if (b.ShowDialog() == DialogResult.OK)
+        //        {
+        //            defaultgamepath = b.FileName;
+        //            CheckGame();
+        //            return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
+        //        }
+        //    }
+        //    try
+        //    {
+        //        File.Exists(defaultgamepath);
+        //    }
+        //    catch (DirectoryNotFoundException) // If the file is not detected at its default location, the program will prompt the user and restart.
+        //    {
+        //        MessageBox.Show("Directory not found. Please navigate to the game folder and select the Rocksmith2014.exe file.",
+        //            "Folder not found",
+        //            MessageBoxButtons.OK,
+        //            MessageBoxIcon.Warning,
+        //            MessageBoxDefaultButton.Button1,
+        //            MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+        //        OpenFileDialog b = new OpenFileDialog();
 
-                if (b.ShowDialog() == DialogResult.OK)
-                {
-                    defaultgamepath = b.FileName;
-                    CheckGame();
-                    return;
-                }
-            }
+        //        if (b.ShowDialog() == DialogResult.OK)
+        //        {
+        //            defaultgamepath = b.FileName;
+        //            CheckGame();
+        //            return;
+        //        }
+        //        Settings.Default.Save();
+        //        Settings.Default.Reload();
+        //    }
         }
     }
-}

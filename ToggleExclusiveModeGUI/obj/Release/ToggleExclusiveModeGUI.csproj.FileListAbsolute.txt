@@ -7,3 +7,13 @@ C:\Users\anto_\source\repos\ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Relea
 C:\Users\anto_\source\repos\ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.csproj.CoreCompileInputs.cache
 C:\Users\anto_\source\repos\ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.exe
 C:\Users\anto_\source\repos\ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.pdb
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\bin\Release\ToggleExclusiveModeGUI.exe.config
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\bin\Release\ToggleExclusiveModeGUI.exe
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\bin\Release\ToggleExclusiveModeGUI.pdb
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.Form1.resources
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.Properties.Resources.resources
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.csproj.GenerateResource.cache
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.csproj.CoreCompileInputs.cache
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.exe
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.pdb
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.csproj.AssemblyReference.cache
