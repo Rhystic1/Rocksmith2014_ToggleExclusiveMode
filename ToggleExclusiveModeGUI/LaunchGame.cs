@@ -11,7 +11,6 @@ namespace ToggleExclusiveModeGUI
     {
         public static void launchGame()
         {
-            //GameCheck.CheckGame(); No longer required since we use the Steam ID.
             System.Diagnostics.Process.Start("steam://run/221680"); // Tells Steam to launch the game regardless of path
         }
     }
