@@ -13,8 +13,6 @@ namespace ToggleExclusiveModeGUI
 {
     public class GameCheck // Logic that allows the program to search for and confirm the game path
     {
-        //public static string defaultpath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith.ini";
-        //public static string defaultgamepath = @"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\Rocksmith2014.exe";
         public static string defaultpath = Settings.Default.defaultpath;
         public static string defaultgamepath = Settings.Default.defaultgamepath;
         public static void CheckFile()
@@ -27,16 +25,8 @@ namespace ToggleExclusiveModeGUI
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.ServiceNotification);
-                OpenFileDialog b = new OpenFileDialog(); // We prompt the user for the correct folder and rerun the logic
-                if (b.ShowDialog() == DialogResult.OK)
-                {
-                    defaultpath = b.FileName; // Changing the path from default to the new one that the user selected.
-                    Settings.Default.defaultpath = b.FileName;
-                    Settings.Default.Save();
-                    Settings.Default.Upgrade();
-                    CheckFile();
-                    return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
-                }
+                ChangeFolder();
+                CheckFile();
             }
             try
             {
@@ -50,17 +40,22 @@ namespace ToggleExclusiveModeGUI
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.ServiceNotification); // Gives focus to the message.
-                OpenFileDialog b = new OpenFileDialog();
+                ChangeFolder();
+                CheckFile();
+            }
+        }
 
-                if (b.ShowDialog() == DialogResult.OK)
-                {
-                    defaultpath = b.FileName;
-                    Settings.Default.defaultpath = b.FileName;
-                    Settings.Default.Save();
-                    Settings.Default.Upgrade();
-                    CheckFile();
-                    return;
-                }
+        public static void ChangeFolder()
+        {
+            OpenFileDialog b = new OpenFileDialog(); // We prompt the user for the correct folder and rerun the logic
+            b.Filter = "INI (*.ini)|*.ini";
+            if (b.ShowDialog() == DialogResult.OK)
+            {
+                defaultpath = b.FileName; // Changing the path from default to the new one that the user selected.
+                Settings.Default.defaultpath = b.FileName; // Overwrites the default settings to persistent storage.
+                Settings.Default.Save();
+                Settings.Default.Upgrade();
+                return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
             }
         }
     }

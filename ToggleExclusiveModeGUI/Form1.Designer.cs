@@ -35,6 +35,7 @@ namespace ToggleExclusiveModeGUI
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.quitButton = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -44,10 +45,9 @@ namespace ToggleExclusiveModeGUI
             this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(180, 62);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(135, 50);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(213, 167);
+            this.button1.Size = new System.Drawing.Size(160, 136);
             this.button1.TabIndex = 1;
             this.button1.Text = "TOGGLE";
             this.button1.UseVisualStyleBackColor = false;
@@ -57,10 +57,9 @@ namespace ToggleExclusiveModeGUI
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(457, 62);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(343, 50);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(219, 167);
+            this.button2.Size = new System.Drawing.Size(164, 136);
             this.button2.TabIndex = 2;
             this.button2.Text = "STATUS";
             this.button2.UseVisualStyleBackColor = true;
@@ -71,10 +70,9 @@ namespace ToggleExclusiveModeGUI
             this.button3.BackColor = System.Drawing.Color.Gold;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(180, 254);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Location = new System.Drawing.Point(135, 206);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(496, 54);
+            this.button3.Size = new System.Drawing.Size(372, 44);
             this.button3.TabIndex = 3;
             this.button3.Text = "LAUNCH THE GAME";
             this.button3.UseVisualStyleBackColor = false;
@@ -85,31 +83,42 @@ namespace ToggleExclusiveModeGUI
             this.quitButton.BackColor = System.Drawing.Color.DimGray;
             this.quitButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.quitButton.ForeColor = System.Drawing.Color.Azure;
-            this.quitButton.Location = new System.Drawing.Point(755, 13);
+            this.quitButton.Location = new System.Drawing.Point(566, 11);
             this.quitButton.Margin = new System.Windows.Forms.Padding(1);
             this.quitButton.Name = "quitButton";
-            this.quitButton.Size = new System.Drawing.Size(75, 23);
+            this.quitButton.Size = new System.Drawing.Size(56, 19);
             this.quitButton.TabIndex = 4;
             this.quitButton.Text = "QUIT";
             this.quitButton.UseVisualStyleBackColor = false;
             this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
             // 
+            // button4
+            // 
+            this.button4.ForeColor = System.Drawing.Color.Black;
+            this.button4.Location = new System.Drawing.Point(12, 268);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(88, 23);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Change path";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.button1;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(851, 373);
+            this.ClientSize = new System.Drawing.Size(638, 303);
             this.ControlBox = false;
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.quitButton);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.ForeColor = System.Drawing.Color.Lime;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
@@ -126,6 +135,7 @@ namespace ToggleExclusiveModeGUI
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button quitButton;
+        private System.Windows.Forms.Button button4;
     }
 }
 

@@ -55,5 +55,11 @@ namespace ToggleExclusiveModeGUI
             Close();
             Application.Exit();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            GameCheck.ChangeFolder();
+            GameCheck.CheckFile();
+        }
     }
 }
