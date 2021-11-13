@@ -43,12 +43,23 @@ namespace ToggleExclusiveModeGUI
                 ChangeFolder();
                 CheckFile();
             }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("File not found. Please navigate to the game folder and select the Rocksmith.ini file.",
+                "Folder not found",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button1,
+                MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+                ChangeFolder();
+                CheckFile();
+            }
         }
 
         public static void ChangeFolder()
         {
             OpenFileDialog b = new OpenFileDialog(); // We prompt the user for the correct folder and rerun the logic
-            b.Filter = "INI (*.ini)|*.ini";
+            b.Filter = "Rocksmith INI (*.ini)|Rocksmith.ini";
             if (b.ShowDialog() == DialogResult.OK)
             {
                 defaultpath = b.FileName; // Changing the path from default to the new one that the user selected.
@@ -56,6 +67,14 @@ namespace ToggleExclusiveModeGUI
                 Settings.Default.Save();
                 Settings.Default.Upgrade();
                 return; // Avoids loop that occurs if the user first selects a wrong file, then selects the correct one (the main method would run multiple times)
+            }
+            else
+            {
+                MessageBox.Show("You need to specify a valid Rocksmith.ini file to continue. Make sure that you have Rocksmith 2014 Remastered installed, and that you have launched the game at least once. This program will now terminate.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
             }
         }
     }
