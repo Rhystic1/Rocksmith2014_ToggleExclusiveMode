@@ -26,22 +26,36 @@ namespace ToggleExclusiveModeGUI
         public void Form1_Load(object sender, EventArgs e)
         {
             GameCheck.CheckFile();
+            Status.RetrieveStatus();
+            if (Status.RetrieveStatus() == true)
+            {
+                textBox1.AppendText("Exclusive Mode is currently Enabled.");
+            }
+            else
+            {
+                textBox1.AppendText("Exclusive Mode is currently Disabled.");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Toggle.Start();
+            textBox1.Clear();
+            Status.RetrieveStatus();
+            if (Status.RetrieveStatus() == true)
+            {
+                textBox1.AppendText("Exclusive Mode is currently Enabled.");
+            }
+            else
+            {
+                textBox1.AppendText("Exclusive Mode is currently Disabled.");
+            }
         }
 
         private void Form1_Closing(object sender, CancelEventArgs e)
         {
             Close();
             Application.Exit();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Status.RetrieveStatus();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -60,6 +74,18 @@ namespace ToggleExclusiveModeGUI
         {
             GameCheck.ChangeFolder();
             GameCheck.CheckFile();
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox1_Text(object sender, EventArgs e)
+        {
         }
     }
 }
