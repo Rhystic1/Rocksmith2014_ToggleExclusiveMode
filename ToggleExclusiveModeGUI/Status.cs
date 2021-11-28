@@ -12,30 +12,20 @@ namespace ToggleExclusiveModeGUI
 {
     public class Status // Logic to check the status of Exclusive Mode without actually changing it.
     {
-        public static void RetrieveStatus()
+        public static bool RetrieveStatus()
         {
-            Console.WriteLine(@"Attempting to read 'Rocksmith.ini'...");
-            Console.WriteLine("\n");
+            bool exModeStatus;
             GameCheck.CheckFile(); // We make sure that the file exists
             string text = File.ReadAllText(GameCheck.defaultpath);
             if (text.Contains("ExclusiveMode=1"))
             {
-                MessageBox.Show("Exclusive Mode is currently enabled.",
-                    "Exclusive Mode Status",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+                exModeStatus = true;
             }
             else
             {
-                MessageBox.Show("Exclusive Mode is currently disabled.",
-                    "Exclusive Mode Status",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.ServiceNotification); // Gives focus to the message.
+                exModeStatus = false;
             }
+            return exModeStatus;
         }
     }
 }

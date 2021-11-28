@@ -17,3 +17,4 @@ C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveMod
 C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.exe
 C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.pdb
 C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.csproj.AssemblyReference.cache
+C:\Users\anto_\source\repos\Rocksmith2014_ToggleExclusiveMode\ToggleExclusiveModeGUI\obj\Release\ToggleExclusiveModeGUI.csproj.SuggestedBindingRedirects.cache

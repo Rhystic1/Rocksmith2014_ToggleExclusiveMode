@@ -19,14 +19,13 @@ namespace ToggleExclusiveModeGUI
         {
             if (!defaultpath.Contains("Rocksmith.ini")) // If we don't find the Rocksmith.ini file, then we're in the wrong folder
             {
-                MessageBox.Show("Invalid file selected. Please select your Rocksmith.ini file contained inside your Rocksmith 2014 installation folder.",
+                MessageBox.Show("Unable to detect the settings file. Please select your Rocksmith.ini file contained inside your Rocksmith 2014 installation folder.",
                     "Invalid selection!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning,
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.ServiceNotification);
                 ChangeFolder();
-                CheckFile();
             }
             try
             {
@@ -41,7 +40,6 @@ namespace ToggleExclusiveModeGUI
                     MessageBoxDefaultButton.Button1,
                     MessageBoxOptions.ServiceNotification); // Gives focus to the message.
                 ChangeFolder();
-                CheckFile();
             }
             catch (FileNotFoundException)
             {
@@ -52,7 +50,6 @@ namespace ToggleExclusiveModeGUI
                 MessageBoxDefaultButton.Button1,
                 MessageBoxOptions.ServiceNotification); // Gives focus to the message.
                 ChangeFolder();
-                CheckFile();
             }
         }
 
@@ -75,6 +72,8 @@ namespace ToggleExclusiveModeGUI
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                Application.Exit();
+                return;
             }
         }
     }
