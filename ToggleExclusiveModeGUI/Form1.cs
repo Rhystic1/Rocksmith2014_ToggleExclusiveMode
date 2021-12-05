@@ -87,5 +87,11 @@ namespace ToggleExclusiveModeGUI
         private void textBox1_Text(object sender, EventArgs e)
         {
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AdvOptions AdvOptions = new AdvOptions();
+            AdvOptions.Show(); 
+        }
     }
 }

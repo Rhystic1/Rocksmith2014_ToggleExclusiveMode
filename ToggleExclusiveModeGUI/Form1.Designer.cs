@@ -36,6 +36,7 @@ namespace ToggleExclusiveModeGUI
             this.quitButton = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.advancedButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -106,6 +107,17 @@ namespace ToggleExclusiveModeGUI
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
+            // advancedButton
+            // 
+            this.advancedButton.ForeColor = System.Drawing.Color.Black;
+            this.advancedButton.Location = new System.Drawing.Point(547, 268);
+            this.advancedButton.Name = "advancedButton";
+            this.advancedButton.Size = new System.Drawing.Size(75, 23);
+            this.advancedButton.TabIndex = 7;
+            this.advancedButton.Text = "Advanced";
+            this.advancedButton.UseVisualStyleBackColor = true;
+            this.advancedButton.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.button1;
@@ -115,6 +127,7 @@ namespace ToggleExclusiveModeGUI
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(638, 303);
             this.ControlBox = false;
+            this.Controls.Add(this.advancedButton);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.quitButton);
@@ -140,6 +153,7 @@ namespace ToggleExclusiveModeGUI
         private System.Windows.Forms.Button quitButton;
         private System.Windows.Forms.Button button4;
         public System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button advancedButton;
     }
 }
 
