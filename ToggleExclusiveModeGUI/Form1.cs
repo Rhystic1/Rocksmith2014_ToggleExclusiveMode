@@ -91,7 +91,12 @@ namespace ToggleExclusiveModeGUI
         private void button2_Click(object sender, EventArgs e)
         {
             AdvOptions AdvOptions = new AdvOptions();
-            AdvOptions.Show(); 
+            AdvOptions.Show();
+            ReadSettings readSettings = new ReadSettings();
+            readSettings.ReadSettingsFile();
+
+            // DEBUG
+            // Console.WriteLine(string.Join(" ", readSettings.ReadSettingsFile()));
         }
     }
 }
