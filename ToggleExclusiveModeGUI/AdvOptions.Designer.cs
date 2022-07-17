@@ -82,6 +82,7 @@
             this.latencyBuffOpt.Name = "latencyBuffOpt";
             this.latencyBuffOpt.Size = new System.Drawing.Size(121, 21);
             this.latencyBuffOpt.TabIndex = 4;
+            this.latencyBuffOpt.SelectedIndexChanged += new System.EventHandler(this.latencyBuffOpt_SelectedIndexChanged);
             // 
             // ultraLowLatOpt
             // 
@@ -101,6 +102,7 @@
             this.bufferSizeOpt.Name = "bufferSizeOpt";
             this.bufferSizeOpt.Size = new System.Drawing.Size(121, 21);
             this.bufferSizeOpt.TabIndex = 6;
+            this.bufferSizeOpt.SelectedIndexChanged += new System.EventHandler(this.bufferSizeOpt_SelectedIndexChanged);
             // 
             // backButton
             // 
