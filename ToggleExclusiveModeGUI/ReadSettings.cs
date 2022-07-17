@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ToggleExclusiveModeGUI
 {
     public class ReadSettings
     {
-        public string[] ReadSettingsFile()
+        public List<string> ReadSettingsFile()
         {
             try
             {
@@ -15,14 +17,15 @@ namespace ToggleExclusiveModeGUI
             {
                 Console.WriteLine("Settings file not found.");
             }
+
             string text = GameCheck.defaultpath;
-            string[] advancedSettings = File.ReadAllLines(text);
-            foreach (string s in advancedSettings)
-            {
-                // DEBUG
-                // Console.WriteLine(s);
-            }
-            return advancedSettings;
+            List<string> rawINISettings = File.ReadAllLines(text).ToList();
+            string[] unwantedStringsArray = { "[Audio]", "[Renderer.Win32]", "[Net]" };
+            List<string> unwantedStrings = new List<string>();
+            unwantedStrings.AddRange(unwantedStringsArray);
+            rawINISettings.RemoveAll(unwantedStrings.Contains);
+
+            return rawINISettings;
         }
     }
 }
