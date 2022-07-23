@@ -20,7 +20,7 @@ namespace ToggleExclusiveModeGUI
         }
         public string[] GenerateMaxBufferSizeArray()
         {
-            string[] maxBufferSize = { "0", "256", "512", "1024", "2056" };
+            string[] maxBufferSize = { "0", "128", "256", "512", "1024", "2056" };
             return maxBufferSize;
         }
     }

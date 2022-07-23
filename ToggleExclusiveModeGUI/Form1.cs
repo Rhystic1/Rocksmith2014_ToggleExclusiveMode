@@ -16,7 +16,7 @@ namespace ToggleExclusiveModeGUI
         public Form1()
         {
             InitializeComponent();
-            TopMost = true;
+            TopMost = false;
         }
 
         public void openFileDialog1_FileOk(object sender, CancelEventArgs e)

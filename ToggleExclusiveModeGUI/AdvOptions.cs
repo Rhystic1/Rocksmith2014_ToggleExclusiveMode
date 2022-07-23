@@ -16,7 +16,7 @@ namespace ToggleExclusiveModeGUI
         public AdvOptions()
         {
             InitializeComponent();
-            TopMost = true;
+            TopMost = false;
 
             // We read the actual .INI for the current settings
             ReadSettings readSettings = new ReadSettings();
@@ -60,46 +60,60 @@ namespace ToggleExclusiveModeGUI
             Close();
         }
 
-        private void CompareSettings(out string uLLNewValue, out string uLLOldValue, out string latBuffNewValue, out string latBuffOldValue, out string buffSizeNewValue, out string buffSizeOldValue)
+        private void UltraLowLatOpt_SelectedIndexChanged(object sender, EventArgs e)
         {
             ReadSettings readSettings = new ReadSettings();
             List<string> iniSettings = readSettings.ReadSettingsFile();
-            GetExistingSettings(iniSettings, out string uLL, out string latBuff, out string buffSize);
-
-            uLLNewValue = ultraLowLatModeText.Text.ToString();
-            uLLOldValue = GetExistingSettings(iniSettings, out uLL, out latBuff, out buffSize).Contains(uLL).ToString();
-
-            latBuffNewValue = latencyBuffText.Text.ToString();
-            latBuffOldValue = GetExistingSettings(iniSettings, out uLL, out latBuff, out buffSize).Contains(latBuff).ToString();
-
-            buffSizeNewValue = bufferSizeText.Text.ToString();
-            buffSizeOldValue = GetExistingSettings(iniSettings, out uLL, out latBuff, out buffSize).Contains(buffSize).ToString();
+            string uLLOldValue = iniSettings.Find(x => x.Contains("Win32UltraLowLatencyMode")).ToString();
+            string uLLNewValue = ultraLowLatOpt.Text.ToString();
+            try
+            {
+                string text = File.ReadAllText(GameCheck.defaultpath);
+                string combinedNew = "Win32UltraLowLatencyMode=" + uLLNewValue;
+                string text2 = text.Replace(uLLOldValue, combinedNew);
+                File.WriteAllText(GameCheck.defaultpath, text2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unable to find, read or write the INI file.");
+            }
         }
-        private void ultraLowLatOpt_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void LatencyBuffOpt_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CompareSettings(out string uLLOldValue, out string uLLNewValue, out string latBuffNewValue, out string latBuffOldValue, out string buffSizeNewValue, out string buffSizeOldValue);
-
-            string text = File.ReadAllText(GameCheck.defaultpath);
-            text.Replace(uLLOldValue, uLLNewValue);
-            File.WriteAllText(GameCheck.defaultpath, text);
+            ReadSettings readSettings = new ReadSettings();
+            List<string> iniSettings = readSettings.ReadSettingsFile();
+            string latBuffOldValue = iniSettings.Find(x => x.Contains("LatencyBuffer")).ToString();
+            string latBuffNewValue = latencyBuffOpt.Text.ToString();
+            try
+            {
+                string text = File.ReadAllText(GameCheck.defaultpath);
+                string combinedNew = "LatencyBuffer=" + latBuffNewValue;
+                string text2 = text.Replace(latBuffOldValue, combinedNew);
+                File.WriteAllText(GameCheck.defaultpath, text2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unable to find, read or write the INI file.");
+            }
         }
 
-        private void latencyBuffOpt_SelectedIndexChanged(object sender, EventArgs e)
+        private void BufferSizeOpt_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CompareSettings(out string uLLOldValue, out string uLLNewValue, out string latBuffNewValue, out string latBuffOldValue, out string buffSizeNewValue, out string buffSizeOldValue);
-
-            string text = File.ReadAllText(GameCheck.defaultpath);
-            text.Replace(latBuffOldValue, latBuffNewValue);
-            File.WriteAllText(GameCheck.defaultpath, text);
-        }
-
-        private void bufferSizeOpt_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CompareSettings(out string uLLOldValue, out string uLLNewValue, out string latBuffNewValue, out string latBuffOldValue, out string buffSizeNewValue, out string buffSizeOldValue);
-
-            string text = File.ReadAllText(GameCheck.defaultpath);
-            text.Replace(buffSizeOldValue, buffSizeNewValue);
-            File.WriteAllText(GameCheck.defaultpath, text);
-        }
+            ReadSettings readSettings = new ReadSettings();
+            List<string> iniSettings = readSettings.ReadSettingsFile();
+            string buffSizeOldValue = iniSettings.Find(x => x.Contains("MaxOutputBufferSize")).ToString();
+            string buffSizeNewValue = bufferSizeOpt.Text.ToString();
+            try
+            {
+                string text = File.ReadAllText(GameCheck.defaultpath);
+                string combinedNew = "MaxOutputBufferSize=" + buffSizeNewValue;
+                string text2 = text.Replace(buffSizeOldValue, combinedNew);
+                File.WriteAllText(GameCheck.defaultpath, text2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unable to find, read or write the INI file.");
+            }
     }
 }
