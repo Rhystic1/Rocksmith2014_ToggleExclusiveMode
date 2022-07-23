@@ -115,5 +115,6 @@ namespace ToggleExclusiveModeGUI
             {
                 Console.WriteLine("Unable to find, read or write the INI file.");
             }
+        }
     }
 }
