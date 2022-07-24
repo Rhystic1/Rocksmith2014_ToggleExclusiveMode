@@ -32,6 +32,11 @@ namespace ToggleExclusiveModeGUI
             bufferSizeOpt.Text = buffSize;
 
             CreateOptions(advOptionsArrays);
+
+            // Initialize tooltips
+            latBuffTooltip.SetToolTip(latencyBuffOpt, "Default: 4\n\nFewer buffers mean lower latency, but increase the demands on your PC to avoid audio crackling.\nMost recent high performance PCs can handle a setting of 2.");
+            buffSizeTooltip.SetToolTip(bufferSizeOpt, "Default: 0 (Auto)\n\nMost audio cards end up using an audio buffer size of 1024.\nFast PCs can usually run with this at 512.\nIf you have disabled Exclusive Mode, you may need to use a higher setting for this.");
+            uLLTooltip.SetToolTip(ultraLowLatOpt, "Default: 1 (On)\n\nSet this value to 0 if you're having trouble getting the game to have good audio performance. Note, however, that disabling this WILL increase latency.");
         }
 
         private void CreateOptions(AdvOptionsArrays advOptionsArrays)
@@ -115,5 +120,6 @@ namespace ToggleExclusiveModeGUI
             {
                 Console.WriteLine("Unable to find, read or write the INI file.");
             }
+        }
     }
 }
